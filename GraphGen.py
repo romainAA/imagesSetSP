@@ -71,7 +71,10 @@ def genExamples():
     for a in range(9):
         for b in range(9):
             for c in range(9):
-                expls += genOneExample(a,b,c)
+                if(a == b == c == 8):
+                    expls += genOneExample(a,b,c)[:-1]
+                else:
+                    expls += genOneExample(a,b,c)
     return expls
 
 examples = """
