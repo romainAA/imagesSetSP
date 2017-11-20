@@ -29,7 +29,7 @@ def drawCloud(draw,im,sh, si, alt, col,ra):
     im2 = im2.resize((si*sh[0],si*sh[1]))
     im2 = im2.point(lambda p: p * col)
     if ra :
-        for x in range(0, int(si*sh[1]/5)):
+        for x in range(0, int(si*sh[0]/5)):
             drawDottedLine(draw, (int(256-si*sh[0]/2)+x*5,alt), (int(256-si*sh[0]/2)+x*5,490), '#0000CC')
     im.paste(im2,(int(256-si*sh[0]/2), int(alt-si*sh[1]/2)), im2)
 
@@ -37,7 +37,7 @@ def launchCreation():
     im = Image.new("RGB", (512,512),  '#99CCFF')
     draw = ImageDraw.Draw(im)
     drawBackground(draw)
-    drawCloud(draw, im,shape[1],size[1],altitude[0], color[0], rain[0])
+    drawCloud(draw, im,shape[1],size[1],altitude[1], color[0], rain[1])
     im.save("Clouds/img"+str(0)+str(0)+str(0)+".png", "PNG")
 
 launchCreation()

@@ -1,4 +1,5 @@
 from PIL import Image, ImageDraw
+import math
 """
 im = Image.new("RGB", (128, 128))
 pix = im.load()
@@ -17,13 +18,21 @@ def drawCircle(draw, x0, y0, t):
     inside = ('black' if t == 'filled' else 'white')
     draw.ellipse((x0, y0, x0+150, y0+150), fill = inside, outline ='black')
     if t == 'lines':
-        fillLines(draw,x0,y0)
+        for i in range(10):
+            tmp = math.sqrt(75**2-(y0+(i*15)-(y0+75))**2)
+            draw.line(((x0+75) - tmp,y0+(i*15), (x0+75) + tmp, y0+(i*15)), fill = 'black', width=3)
 
 def drawTriangle(draw, x0, y0, t):
     inside = ('black' if t == 'filled' else 'white')
     draw.polygon((x0+75,y0,x0,y0+150,x0+150,y0+150), fill = inside, outline ='black')
     if t == 'lines':
-        fillLines(draw,x0,y0)
+        for i in range(10):
+            tmp = 10
+            xA = int(-(y0+(i*15)-(y0+2*(x0+75)))/2)
+            xB = int((y0+(i*15)-(y0-2*(x0+75)))/2)
+            draw.line((xA, y0+(i*15), xB, y0+(i*15)), fill = 'black', width=3)
+
+        # fillLines(draw,x0,y0)
 
 def drawSquare(draw, x0, y0, t):
     inside = ('black' if t == 'filled' else 'white')
@@ -65,8 +74,8 @@ def launchCreation(nbCat):
                     drawShape(draw,i,10,10)
                     drawShape(draw,j,180,180)
                     drawShape(draw,k,341,341)
-                im.save("ImagesTest"+str(nbCat)+"/img"+str(i)+str(j)+str(k)+".png", "PNG")
+                im.save("ImagesTest"+"/img"+str(i)+str(j)+str(k)+".png", "PNG")
                 im = Image.new("RGB", (512,512), "white")
                 draw = ImageDraw.Draw(im)
 
-launchCreation(2)
+launchCreation(3)
